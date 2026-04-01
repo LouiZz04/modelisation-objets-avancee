@@ -11,7 +11,6 @@ def test_etudiant_creation_et_heritage():
     assert e.moyenne == 15.0
     assert e.liste_cours == []
     
-    # Vérification stricte de l'héritage demandée dans le TP
     assert isinstance(e, Personne) is True 
 
 def test_etudiant_ajouter_cours():

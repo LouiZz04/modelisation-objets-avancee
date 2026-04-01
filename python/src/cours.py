@@ -5,3 +5,6 @@ class Cours:
 
     def __str__(self) -> str:
         return f"Cours: {self.nom_cours} (Prof: {self.professeur_responsable})"
+
+    def __repr__(self) -> str:
+        return f"Cours(nom_cours='{self.nom_cours}', professeur='{self.professeur_responsable}')"
