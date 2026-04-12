@@ -50,8 +50,8 @@ public class Etudiant extends Personne {
         return "Etudiant{" +
             "numeroEtudiant='" + numeroEtudiant + '\'' +
             ", moyenne=" + moyenne +
-            ", nom='" + nom + '\'' +
-            ", age=" + age +
+            ", nom='" + getNom() + '\'' +
+            ", age=" + getAge() +
             ", listeCours=" + listeCours +
             '}';
     }
