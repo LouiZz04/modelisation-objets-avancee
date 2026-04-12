@@ -11,5 +11,11 @@ public class Main {
 
         System.out.println("Instance de Personne ? " + (etudiant instanceof Personne));
         System.out.println(etudiant);
+
+        try {
+            etudiant.setMoyenne(25.0);
+        } catch (IllegalArgumentException e) {
+            System.out.println("Modification refusee: " + e.getMessage());
+        }
     }
 }
