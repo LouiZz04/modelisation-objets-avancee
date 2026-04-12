@@ -1,26 +1,34 @@
 package heritage;
 
 public class Personne {
-    protected String nom;
-    protected int age;
+    private String nom;
+    private int age;
 
     public Personne(String nom, int age) {
-        if (nom == null || nom.isBlank()) {
-            throw new IllegalArgumentException("Le nom est obligatoire");
-        }
-        if (age < 0) {
-            throw new IllegalArgumentException("L'age ne peut pas etre negatif");
-        }
-        this.nom = nom;
-        this.age = age;
+        setNom(nom);
+        setAge(age);
     }
 
     public String getNom() {
         return nom;
     }
 
+    public void setNom(String nom) {
+        if (nom == null || nom.isBlank()) {
+            throw new IllegalArgumentException("Le nom est obligatoire");
+        }
+        this.nom = nom;
+    }
+
     public int getAge() {
         return age;
+    }
+
+    public void setAge(int age) {
+        if (age < 0 || age > 100) {
+            throw new IllegalArgumentException("L'age doit etre compris entre 0 et 100");
+        }
+        this.age = age;
     }
 
     @Override

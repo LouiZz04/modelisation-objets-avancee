@@ -2,6 +2,10 @@ package heritage;
 
 import org.junit.jupiter.api.Test;
 
+import java.lang.reflect.Field;
+import java.lang.reflect.Method;
+import java.lang.reflect.Modifier;
+
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertInstanceOf;
 import static org.junit.jupiter.api.Assertions.assertThrows;
@@ -32,6 +36,16 @@ class EtudiantTest {
     }
 
     @Test
+    void shouldUpdateMoyenneWithSetter() {
+        Etudiant etudiant = new Etudiant("Alice", 21, "E001", 14.0);
+
+        etudiant.setMoyenne(18.5);
+
+        assertEquals(18.5, etudiant.getMoyenne());
+        assertThrows(IllegalArgumentException.class, () -> etudiant.setMoyenne(-1.0));
+    }
+
+    @Test
     void shouldAddCours() {
         Etudiant etudiant = new Etudiant("Alice", 21, "E001", 14.0);
         Cours cours1 = new Cours("POO", "M. Dupont");
@@ -43,6 +57,22 @@ class EtudiantTest {
         assertEquals(2, etudiant.getListeCours().size());
         assertEquals(cours1, etudiant.getListeCours().get(0));
         assertEquals(cours2, etudiant.getListeCours().get(1));
+        assertThrows(UnsupportedOperationException.class, () -> etudiant.getListeCours().add(cours1));
+    }
+
+    @Test
+    void shouldKeepMoyennePrivate() throws NoSuchFieldException {
+        Field moyenneField = Etudiant.class.getDeclaredField("moyenne");
+        assertTrue(Modifier.isPrivate(moyenneField.getModifiers()));
+    }
+
+    @Test
+    void shouldExposeNoSetterForNumeroEtudiant() {
+        Method[] methods = Etudiant.class.getDeclaredMethods();
+
+        for (Method method : methods) {
+            assertTrue(!method.getName().equals("setNumeroEtudiant"));
+        }
     }
 
     @Test
