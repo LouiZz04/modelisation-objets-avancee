@@ -85,4 +85,16 @@ class EtudiantTest {
         assertTrue(result.contains("E001"));
         assertTrue(result.contains("14.0"));
     }
+
+    @Test
+    void shouldOverrideAfficherDetails() {
+        Etudiant etudiant = new Etudiant("Alice", 21, "E001", 14.0);
+        etudiant.ajouterCours(new Cours("POO", "M. Dupont"));
+
+        String details = etudiant.afficherDetails();
+
+        assertTrue(details.contains("Alice"));
+        assertTrue(details.contains("E001"));
+        assertTrue(details.contains("POO"));
+    }
 }

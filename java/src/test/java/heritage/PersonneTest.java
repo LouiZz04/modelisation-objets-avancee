@@ -65,4 +65,14 @@ class PersonneTest {
         assertTrue(result.contains("Bob"));
         assertTrue(result.contains("22"));
     }
+
+    @Test
+    void shouldExposeAfficherDetails() {
+        Personne personne = new Personne("Khadija", 30);
+
+        String details = personne.afficherDetails();
+
+        assertTrue(details.contains("Khadija"));
+        assertTrue(details.contains("30"));
+    }
 }

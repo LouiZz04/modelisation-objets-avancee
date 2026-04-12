@@ -31,11 +31,15 @@ public class Personne {
         this.age = age;
     }
 
-    @Override
-    public String toString() {
+    public String afficherDetails() {
         return "Personne{" +
             "nom='" + nom + '\'' +
             ", age=" + age +
             '}';
+    }
+
+    @Override
+    public String toString() {
+        return afficherDetails();
     }
 }
