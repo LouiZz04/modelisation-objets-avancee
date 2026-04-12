@@ -1,12 +1,24 @@
 import pytest
 from src.cours import Cours
 
-def test_cours_creation():
-    c = Cours("Python Avancé", "M. Dupont")
-    assert c.nom_cours == "Python Avancé"
-    assert c.professeur_responsable == "M. Dupont"
 
-def test_cours_str():
-    c = Cours("Java Avancé", "Mme. Martin")
-    assert "Java" in str(c)
-    assert "Mme. Martin" in str(c)
+def test_course_creation():
+    course = Cours("Advanced Python", "Mr. Dupont")
+    assert course.nom_cours == "Advanced Python"
+    assert course.professeur_responsable == "Mr. Dupont"
+
+
+def test_course_string():
+    course = Cours("Advanced Java", "Ms. Martin")
+    assert "Java" in str(course)
+    assert "Ms. Martin" in str(course)
+
+
+def test_blank_course_name_raises_error():
+    with pytest.raises(ValueError):
+        Cours("", "Ms. Martin")
+
+
+def test_blank_teacher_name_raises_error():
+    with pytest.raises(ValueError):
+        Cours("UML", "   ")
