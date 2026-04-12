@@ -46,7 +46,7 @@ public class Etudiant extends Personne {
     }
 
     @Override
-    public String toString() {
+    public String afficherDetails() {
         return "Etudiant{" +
             "numeroEtudiant='" + numeroEtudiant + '\'' +
             ", moyenne=" + moyenne +
@@ -54,5 +54,10 @@ public class Etudiant extends Personne {
             ", age=" + getAge() +
             ", listeCours=" + listeCours +
             '}';
+    }
+
+    @Override
+    public String toString() {
+        return afficherDetails();
     }
 }
