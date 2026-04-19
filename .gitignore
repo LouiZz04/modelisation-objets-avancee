@@ -1,2 +1,28 @@
 target
 .m2
+# Virtual Environments
+.venv/
+venv/
+env/
+
+# Pytest and Coverage
+.pytest_cache/
+.coverage
+htmlcov/
+
+# Python Cache
+__pycache__/
+*.pyc
+*.pyo
+
+# IDEs and Editors
+.vscode/
+.idea/
+.codex/
+
+# OS generated files
+.DS_Store
+Thumbs.db
+
+# Java build output
+java/target/
