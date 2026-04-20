@@ -1,7 +1,8 @@
 import pytest
-from src.personne import Personne
-from src.etudiant import Etudiant
+
 from src.cours import Cours
+from src.etudiant import Etudiant
+from src.personne import Personne
 
 
 def test_student_creation_and_inheritance():
@@ -11,6 +12,7 @@ def test_student_creation_and_inheritance():
     assert student.numero_etudiant == "E12345"
     assert student.moyenne == 15.0
     assert student.liste_cours == ()
+    assert student.notes == ()
 
     assert isinstance(student, Personne) is True
 
@@ -81,6 +83,15 @@ def test_course_list_is_not_mutable_from_outside():
         student.liste_cours.append(Cours("Java", "Teacher Z"))
 
 
+def test_adding_note_updates_average():
+    student = Etudiant("Alice", 20, "E99999", 0.0)
+    student.ajouter_note(10)
+    student.ajouter_note(14)
+
+    assert student.notes == (10.0, 14.0)
+    assert student.moyenne == 12.0
+
+
 def test_afficher_details_for_student():
     student = Etudiant("Alice", 20, "E99999", 17.5)
     course = Cours("Python", "Teacher Y")
@@ -91,3 +102,4 @@ def test_afficher_details_for_student():
     assert "Alice" in details
     assert "17.5" in details
     assert "Python" in details
+    assert "mention" in details

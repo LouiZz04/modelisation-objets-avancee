@@ -1,4 +1,7 @@
-class Personne:
+from abc import ABC, abstractmethod
+
+
+class Personne(ABC):
     def __init__(self, nom: str, age: int):
         self.nom = nom
         self.age = age
@@ -23,11 +26,12 @@ class Personne:
             raise ValueError(f"Age must be between 0 and 100, got: {value}")
         self.__age = value
 
+    @abstractmethod
     def afficher_details(self) -> str:
-        return f"Person: {self.nom}, age: {self.age}"
+        raise NotImplementedError
 
     def __str__(self) -> str:
         return self.afficher_details()
 
     def __repr__(self) -> str:
-        return f"Personne(nom='{self.nom}', age={self.age})"
+        return f"{self.__class__.__name__}(nom='{self.nom}', age={self.age})"

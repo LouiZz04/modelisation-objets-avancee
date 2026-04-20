@@ -25,17 +25,14 @@ class Enseignant(Personne):
     def salaire(self, value: float) -> None:
         if value < 0:
             raise ValueError(f"Salary must be positive, got: {value}")
-        self.__salaire = value
+        self.__salaire = float(value)
 
     def afficher_details(self) -> str:
         return (
-            f"{super().afficher_details()}, "
+            f"Teacher: {self.nom}, age: {self.age}, "
             f"subject: {self.matiere}, "
             f"salary: {self.salaire:.2f}"
         )
-
-    def __str__(self) -> str:
-        return self.afficher_details()
 
     def __repr__(self) -> str:
         return (

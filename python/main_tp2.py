@@ -1,16 +1,15 @@
 from src.etudiant import Etudiant
+from src.strategies import MentionBienveillanteStrategy
 
 
 def main():
-    print("--- TP2 Demo: Encapsulation ---")
+    print("--- TP Patterns: Strategy ---")
 
-    student = Etudiant("Alice", 21, "ENSTA-2026-001", 14.0)
+    student = Etudiant("Alice", 21, "ENSTA-2026-001", 13.0)
     print(student.afficher_details())
 
-    try:
-        student.moyenne = 25
-    except ValueError as error:
-        print(f"Update refused: {error}")
+    student.definir_mention_strategy(MentionBienveillanteStrategy())
+    print(student.afficher_details())
 
 
 if __name__ == "__main__":

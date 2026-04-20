@@ -1,23 +1,19 @@
-from src.cours import Cours
-from src.etudiant import Etudiant
+from src.personne_factory import PersonneFactory
+from src.scolarite_manager import ScolariteManager
 
 
 def main():
-    print("--- TP1 Demo: Inheritance ---")
+    print("--- TP Patterns: Factory + Singleton ---")
 
-    c1 = Cours("Advanced Object Modeling", "Teacher X")
-    c2 = Cours("Software Architecture", "Teacher Y")
+    manager = ScolariteManager()
+    student = PersonneFactory.creer_etudiant("Alice", 21, "ENSTA-2026-001", 14.0)
+    teacher = PersonneFactory.creer_enseignant("Claire", 40, "Architecture", 3200.0)
 
-    etudiant1 = Etudiant("Alice", 21, "ENSTA-2026-001", 16.5)
+    manager.ajouter_etudiant(student)
 
-    etudiant1.ajouter_cours(c1)
-    etudiant1.ajouter_cours(c2)
-
-    print(etudiant1)
-
-    print("\n--- Technical View (repr) ---")
-    print(repr(etudiant1))
-    print(repr(c1))
+    print(student.afficher_details())
+    print(teacher.afficher_details())
+    print(f"Singleton manager id: {id(manager)}")
 
 
 if __name__ == "__main__":
