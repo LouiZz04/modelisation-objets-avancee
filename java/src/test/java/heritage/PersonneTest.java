@@ -11,9 +11,20 @@ import static org.junit.jupiter.api.Assertions.assertTrue;
 
 class PersonneTest {
 
+    private static class PersonneTestDouble extends Personne {
+        public PersonneTestDouble(String nom, int age) {
+            super(nom, age);
+        }
+
+        @Override
+        public String afficherDetails() {
+            return getNom() + ":" + getAge();
+        }
+    }
+
     @Test
-    void shouldCreatePersonneWithNomAndAge() {
-        Personne personne = new Personne("Alice", 20);
+    void shouldCreatePersonneThroughSubclass() {
+        Personne personne = new PersonneTestDouble("Alice", 20);
 
         assertEquals("Alice", personne.getNom());
         assertEquals(20, personne.getAge());
@@ -21,22 +32,22 @@ class PersonneTest {
 
     @Test
     void shouldRejectBlankNom() {
-        assertThrows(IllegalArgumentException.class, () -> new Personne(" ", 20));
+        assertThrows(IllegalArgumentException.class, () -> new PersonneTestDouble(" ", 20));
     }
 
     @Test
     void shouldRejectNegativeAge() {
-        assertThrows(IllegalArgumentException.class, () -> new Personne("Alice", -1));
+        assertThrows(IllegalArgumentException.class, () -> new PersonneTestDouble("Alice", -1));
     }
 
     @Test
     void shouldRejectAgeAbove100() {
-        assertThrows(IllegalArgumentException.class, () -> new Personne("Alice", 101));
+        assertThrows(IllegalArgumentException.class, () -> new PersonneTestDouble("Alice", 101));
     }
 
     @Test
     void shouldValidateSetters() {
-        Personne personne = new Personne("Alice", 20);
+        Personne personne = new PersonneTestDouble("Alice", 20);
 
         personne.setNom("Marie");
         personne.setAge(35);
@@ -57,12 +68,7 @@ class PersonneTest {
     }
 
     @Test
-    void shouldFormatToString() {
-        Personne personne = new Personne("Bob", 22);
-
-        String result = personne.toString();
-
-        assertTrue(result.contains("Bob"));
-        assertTrue(result.contains("22"));
+    void shouldBeAbstract() {
+        assertTrue(Modifier.isAbstract(Personne.class.getModifiers()));
     }
 }

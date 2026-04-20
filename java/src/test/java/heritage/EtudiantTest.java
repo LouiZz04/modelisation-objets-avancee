@@ -28,6 +28,7 @@ class EtudiantTest {
 
         assertEquals("E001", etudiant.getNumeroEtudiant());
         assertEquals(14.0, etudiant.getMoyenne());
+        assertTrue(etudiant.getNotes().isEmpty());
     }
 
     @Test
@@ -61,6 +62,17 @@ class EtudiantTest {
     }
 
     @Test
+    void shouldUpdateAverageWhenAddingNotes() {
+        Etudiant etudiant = new Etudiant("Alice", 21, "E001", 0.0);
+
+        etudiant.ajouterNote(10.0);
+        etudiant.ajouterNote(14.0);
+
+        assertEquals(2, etudiant.getNotes().size());
+        assertEquals(12.0, etudiant.getMoyenne());
+    }
+
+    @Test
     void shouldKeepMoyennePrivate() throws NoSuchFieldException {
         Field moyenneField = Etudiant.class.getDeclaredField("moyenne");
         assertTrue(Modifier.isPrivate(moyenneField.getModifiers()));
@@ -84,5 +96,6 @@ class EtudiantTest {
         assertTrue(result.contains("Alice"));
         assertTrue(result.contains("E001"));
         assertTrue(result.contains("14.0"));
+        assertTrue(result.contains("mention"));
     }
 }

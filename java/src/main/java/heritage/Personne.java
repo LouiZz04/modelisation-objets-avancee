@@ -1,6 +1,6 @@
 package heritage;
 
-public class Personne {
+public abstract class Personne {
     private String nom;
     private int age;
 
@@ -31,11 +31,10 @@ public class Personne {
         this.age = age;
     }
 
+    public abstract String afficherDetails();
+
     @Override
     public String toString() {
-        return "Personne{" +
-            "nom='" + nom + '\'' +
-            ", age=" + age +
-            '}';
+        return afficherDetails();
     }
 }
