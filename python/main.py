@@ -1,19 +1,21 @@
-from src.personne_factory import PersonneFactory
-from src.scolarite_manager import ScolariteManager
+from src.cours import Cours
+from src.etudiant import Etudiant
 
 
 def main():
-    print("--- TP Patterns: Factory + Singleton ---")
+    print("--- TP1: Heritage et composition ---")
 
-    manager = ScolariteManager()
-    student = PersonneFactory.creer_etudiant("Alice", 21, "ENSTA-2026-001", 14.0)
-    teacher = PersonneFactory.creer_enseignant("Claire", 40, "Architecture", 3200.0)
+    etudiant = Etudiant("Alice", 21, "ENSTA-2026-001", 15.5)
+    cours_poo = Cours("POO", "M. Dupont")
+    cours_algo = Cours("Algorithmique", "Mme Martin")
 
-    manager.ajouter_etudiant(student)
+    etudiant.ajouter_cours(cours_poo)
+    etudiant.ajouter_cours(cours_algo)
 
-    print(student.afficher_details())
-    print(teacher.afficher_details())
-    print(f"Singleton manager id: {id(manager)}")
+    print(etudiant.afficher_details())
+    print("Cours suivis:")
+    for cours in etudiant.liste_cours:
+        print(f"- {cours}")
 
 
 if __name__ == "__main__":

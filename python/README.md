@@ -20,6 +20,7 @@ python -m pytest -q
 python main.py
 python main_tp2.py
 python main_tp3.py
+python main_patterns.py
 ```
 
 ## Patterns covered

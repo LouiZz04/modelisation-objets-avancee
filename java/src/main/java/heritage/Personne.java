@@ -25,8 +25,8 @@ public abstract class Personne {
     }
 
     public void setAge(int age) {
-        if (age < 0 || age > 100) {
-            throw new IllegalArgumentException("L'age doit etre compris entre 0 et 100");
+        if (age <= 0 || age > 100) {
+            throw new IllegalArgumentException("L'age doit etre compris entre 1 et 100");
         }
         this.age = age;
     }

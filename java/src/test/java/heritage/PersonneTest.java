@@ -41,6 +41,11 @@ class PersonneTest {
     }
 
     @Test
+    void shouldRejectZeroAge() {
+        assertThrows(IllegalArgumentException.class, () -> new PersonneTestDouble("Alice", 0));
+    }
+
+    @Test
     void shouldRejectAgeAbove100() {
         assertThrows(IllegalArgumentException.class, () -> new PersonneTestDouble("Alice", 101));
     }

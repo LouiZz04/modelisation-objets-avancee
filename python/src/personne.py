@@ -22,8 +22,8 @@ class Personne(ABC):
 
     @age.setter
     def age(self, value: int) -> None:
-        if value < 0 or value > 100:
-            raise ValueError(f"Age must be between 0 and 100, got: {value}")
+        if value <= 0 or value > 100:
+            raise ValueError(f"Age must be between 1 and 100, got: {value}")
         self.__age = value
 
     @abstractmethod
