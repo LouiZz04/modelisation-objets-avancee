@@ -1,3 +1,5 @@
+import pytest
+
 from src.decorators import EtudiantBoursierDecorator, EtudiantDelegueDecorator
 from src.enseignant import Enseignant
 from src.etudiant import Etudiant
@@ -52,14 +54,34 @@ def test_adapter_converts_legacy_course_strings():
     assert courses[1].professeur_responsable == "M. Dupont"
 
 
+def test_adapter_rejects_invalid_legacy_course_string():
+    with pytest.raises(ValueError):
+        LegacyCoursAdapter.convertir_chaine("Patterns")
+
+
 def test_decorator_adds_extra_details():
     student = Etudiant("Alice", 21, "E001", 14.0)
     decorated = EtudiantDelegueDecorator(EtudiantBoursierDecorator(student, 250.0), "ING2")
 
     details = decorated.afficher_details()
 
-    assert "scholarship" in details
-    assert "delegate" in details
+    assert "bourse" in details
+    assert "delegue" in details
+
+
+def test_decorator_rejects_invalid_data():
+    student = Etudiant("Alice", 21, "E001", 14.0)
+
+    with pytest.raises(ValueError):
+        EtudiantBoursierDecorator(student, -1.0)
+
+    with pytest.raises(ValueError):
+        EtudiantDelegueDecorator(student, " ")
+
+
+def test_factory_rejects_empty_person_type():
+    with pytest.raises(ValueError):
+        PersonneFactory.creer_personne(" ", nom="Alice", age=20)
 
 
 def test_strategy_can_change_student_mention():

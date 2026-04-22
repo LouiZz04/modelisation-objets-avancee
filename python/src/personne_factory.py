@@ -14,6 +14,8 @@ class PersonneFactory:
 
     @staticmethod
     def creer_personne(type_personne: str, **kwargs: object) -> Personne:
+        if not isinstance(type_personne, str) or not type_personne.strip():
+            raise ValueError("Le type de personne est obligatoire")
         type_normalise = type_personne.strip().lower()
         if type_normalise == "etudiant":
             return PersonneFactory.creer_etudiant(
@@ -29,4 +31,4 @@ class PersonneFactory:
                 kwargs["matiere"],
                 float(kwargs["salaire"]),
             )
-        raise ValueError(f"Unsupported person type: {type_personne}")
+        raise ValueError(f"Type de personne inconnu: {type_personne}")

@@ -1,9 +1,9 @@
 class Cours:
     def __init__(self, nom_cours: str, professeur_responsable: str):
         if not isinstance(nom_cours, str) or not nom_cours.strip():
-            raise ValueError("Course name cannot be empty")
+            raise ValueError("Le nom du cours est obligatoire")
         if not isinstance(professeur_responsable, str) or not professeur_responsable.strip():
-            raise ValueError("Teacher name cannot be empty")
+            raise ValueError("Le nom du professeur est obligatoire")
 
         self.__nom_cours = nom_cours.strip()
         self.__professeur_responsable = professeur_responsable.strip()
@@ -17,7 +17,7 @@ class Cours:
         return self.__professeur_responsable
 
     def __str__(self) -> str:
-        return f"Course: {self.nom_cours} (Teacher: {self.professeur_responsable})"
+        return f"Cours: {self.nom_cours} (professeur: {self.professeur_responsable})"
 
     def __repr__(self) -> str:
         return (

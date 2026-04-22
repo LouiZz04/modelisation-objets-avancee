@@ -3,20 +3,20 @@ from src.cours import Cours
 
 
 def test_course_creation():
-    course = Cours("Advanced Python", "Mr. Dupont")
-    assert course.nom_cours == "Advanced Python"
-    assert course.professeur_responsable == "Mr. Dupont"
+    course = Cours("POO", "M. Dupont")
+    assert course.nom_cours == "POO"
+    assert course.professeur_responsable == "M. Dupont"
 
 
 def test_course_string():
-    course = Cours("Advanced Java", "Ms. Martin")
+    course = Cours("Java", "Mme Martin")
     assert "Java" in str(course)
-    assert "Ms. Martin" in str(course)
+    assert "Mme Martin" in str(course)
 
 
 def test_blank_course_name_raises_error():
     with pytest.raises(ValueError):
-        Cours("", "Ms. Martin")
+        Cours("", "Mme Martin")
 
 
 def test_blank_teacher_name_raises_error():

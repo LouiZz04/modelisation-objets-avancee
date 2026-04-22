@@ -13,7 +13,7 @@ class Personne(ABC):
     @nom.setter
     def nom(self, value: str) -> None:
         if not isinstance(value, str) or not value.strip():
-            raise ValueError("Name cannot be empty")
+            raise ValueError("Le nom est obligatoire")
         self.__nom = value.strip()
 
     @property
@@ -22,8 +22,10 @@ class Personne(ABC):
 
     @age.setter
     def age(self, value: int) -> None:
+        if not isinstance(value, int) or isinstance(value, bool):
+            raise TypeError(f"L'age doit etre un entier, valeur recue: {value}")
         if value <= 0 or value > 100:
-            raise ValueError(f"Age must be between 1 and 100, got: {value}")
+            raise ValueError(f"L'age doit etre compris entre 1 et 100, valeur recue: {value}")
         self.__age = value
 
     @abstractmethod

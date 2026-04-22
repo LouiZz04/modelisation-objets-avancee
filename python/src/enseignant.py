@@ -1,3 +1,5 @@
+from math import isfinite
+
 from src.personne import Personne
 
 
@@ -14,7 +16,7 @@ class Enseignant(Personne):
     @matiere.setter
     def matiere(self, value: str) -> None:
         if not isinstance(value, str) or not value.strip():
-            raise ValueError("Subject cannot be empty")
+            raise ValueError("La matiere est obligatoire")
         self.__matiere = value.strip()
 
     @property
@@ -23,15 +25,17 @@ class Enseignant(Personne):
 
     @salaire.setter
     def salaire(self, value: float) -> None:
+        if not isinstance(value, (int, float)) or isinstance(value, bool) or not isfinite(float(value)):
+            raise TypeError("Le salaire doit etre un nombre")
         if value < 0:
-            raise ValueError(f"Salary must be positive, got: {value}")
+            raise ValueError(f"Le salaire doit etre positif ou nul, valeur recue: {value}")
         self.__salaire = float(value)
 
     def afficher_details(self) -> str:
         return (
-            f"Teacher: {self.nom}, age: {self.age}, "
-            f"subject: {self.matiere}, "
-            f"salary: {self.salaire:.2f}"
+            f"Enseignant: {self.nom}, age: {self.age}, "
+            f"matiere: {self.matiere}, "
+            f"salaire: {self.salaire:.2f}"
         )
 
     def __repr__(self) -> str:

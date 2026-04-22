@@ -46,7 +46,7 @@ class ScolariteManager(EtudiantObserver):
 
     def ajouter_etudiant(self, etudiant: Etudiant) -> None:
         if not isinstance(etudiant, Etudiant):
-            raise TypeError("Manager only accepts Etudiant instances")
+            raise TypeError("Le manager accepte uniquement des etudiants")
         if etudiant not in self.__etudiants:
             self.__etudiants.append(etudiant)
             etudiant.ajouter_observateur(self)
@@ -54,7 +54,7 @@ class ScolariteManager(EtudiantObserver):
 
     def definir_tri_strategy(self, strategy: TriEtudiantsStrategy) -> None:
         if not isinstance(strategy, TriEtudiantsStrategy):
-            raise TypeError("Strategy must inherit from TriEtudiantsStrategy")
+            raise TypeError("La strategie doit etre une TriEtudiantsStrategy")
         self.__tri_strategy = strategy
 
     def etudiants_tries(self) -> tuple[Etudiant, ...]:

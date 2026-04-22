@@ -6,7 +6,7 @@ from src.strategies import MentionBienveillanteStrategy, TriParMoyenneStrategy
 
 
 def main():
-    print("--- TP Patterns: demo complete ---")
+    print("--- TP Patterns ---")
 
     manager = ScolariteManager()
 

@@ -24,6 +24,11 @@ def test_invalid_age_raises_error():
         PersonneTestDouble("Alice", 101)
 
 
+def test_non_integer_age_raises_error():
+    with pytest.raises(TypeError):
+        PersonneTestDouble("Alice", 20.5)
+
+
 def test_zero_age_raises_error():
     with pytest.raises(ValueError):
         PersonneTestDouble("Alice", 0)
