@@ -3,43 +3,35 @@ package heritage;
 import org.junit.jupiter.api.Test;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
-import static org.junit.jupiter.api.Assertions.assertInstanceOf;
 import static org.junit.jupiter.api.Assertions.assertThrows;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 
 class EnseignantTest {
 
     @Test
-    void shouldBeAPersonne() {
-        Enseignant enseignant = new Enseignant("Dr. Diallo", 40, "Maths", 3000.0);
+    void shouldCreateTeacher() {
+        Enseignant enseignant = new Enseignant("Claire", 40, "Architecture", 3200.0);
 
-        assertInstanceOf(Personne.class, enseignant);
-        assertEquals("Dr. Diallo", enseignant.getNom());
+        assertEquals("Claire", enseignant.getNom());
         assertEquals(40, enseignant.getAge());
+        assertEquals("Architecture", enseignant.getMatiere());
+        assertEquals(3200.0, enseignant.getSalaire());
     }
 
     @Test
-    void shouldStoreMatiereAndSalaire() {
-        Enseignant enseignant = new Enseignant("Dr. Diallo", 40, "Maths", 3000.0);
-
-        assertEquals("Maths", enseignant.getMatiere());
-        assertEquals(3000.0, enseignant.getSalaire());
+    void shouldRejectInvalidTeacherData() {
+        assertThrows(IllegalArgumentException.class, () -> new Enseignant("Claire", 40, "", 3200.0));
+        assertThrows(IllegalArgumentException.class, () -> new Enseignant("Claire", 40, "Architecture", -10.0));
     }
 
     @Test
-    void shouldRejectInvalidValues() {
-        assertThrows(IllegalArgumentException.class, () -> new Enseignant("Dr. Diallo", 40, "", 3000.0));
-        assertThrows(IllegalArgumentException.class, () -> new Enseignant("Dr. Diallo", 40, "Maths", -100.0));
-    }
+    void shouldFormatTeacherDetails() {
+        Enseignant enseignant = new Enseignant("Claire", 40, "Architecture", 3200.0);
 
-    @Test
-    void shouldOverrideAfficherDetails() {
-        Enseignant enseignant = new Enseignant("Dr. Diallo", 40, "Maths", 3000.0);
+        String result = enseignant.afficherDetails();
 
-        String details = enseignant.afficherDetails();
-
-        assertTrue(details.contains("Dr. Diallo"));
-        assertTrue(details.contains("Maths"));
-        assertTrue(details.contains("3000.0"));
+        assertTrue(result.contains("Claire"));
+        assertTrue(result.contains("Architecture"));
+        assertTrue(result.contains("3200.0"));
     }
 }

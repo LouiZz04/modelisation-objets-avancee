@@ -2,15 +2,15 @@ from src.etudiant import Etudiant
 
 
 def main():
-    print("--- TP2 Demo: Encapsulation ---")
+    print("--- TP2: Encapsulation ---")
 
-    student = Etudiant("Alice", 21, "ENSTA-2026-001", 14.0)
-    print(student.afficher_details())
+    etudiant = Etudiant("Alice", 21, "ENSTA-2026-001", 14.0)
+    print(etudiant.afficher_details())
 
     try:
-        student.moyenne = 25
+        etudiant.moyenne = 25
     except ValueError as error:
-        print(f"Update refused: {error}")
+        print(f"Modification refusee: {error}")
 
 
 if __name__ == "__main__":

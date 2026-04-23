@@ -18,7 +18,12 @@ __pycache__/
 # IDEs and Editors
 .vscode/
 .idea/
+.codex
+.codex/
 
 # OS generated files
 .DS_Store
 Thumbs.db
+
+# Java build output
+java/target/

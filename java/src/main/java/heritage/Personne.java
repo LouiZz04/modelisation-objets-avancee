@@ -1,6 +1,6 @@
 package heritage;
 
-public class Personne {
+public abstract class Personne {
     private String nom;
     private int age;
 
@@ -25,17 +25,17 @@ public class Personne {
     }
 
     public void setAge(int age) {
-        if (age < 0 || age > 100) {
-            throw new IllegalArgumentException("L'age doit etre compris entre 0 et 100");
+        if (age <= 0 || age > 100) {
+            throw new IllegalArgumentException("L'age doit etre compris entre 1 et 100");
         }
         this.age = age;
     }
 
-    public String afficherDetails() {
-        return "Personne{" +
-            "nom='" + nom + '\'' +
-            ", age=" + age +
-            '}';
+    public abstract String afficherDetails();
+
+    @Override
+    public String toString() {
+        return afficherDetails();
     }
 
     @Override

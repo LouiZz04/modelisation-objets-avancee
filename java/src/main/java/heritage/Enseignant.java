@@ -41,9 +41,4 @@ public class Enseignant extends Personne {
             ", salaire=" + salaire +
             '}';
     }
-
-    @Override
-    public String toString() {
-        return afficherDetails();
-    }
 }

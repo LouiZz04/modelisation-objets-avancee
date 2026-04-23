@@ -1,7 +1,8 @@
 import pytest
-from src.personne import Personne
-from src.etudiant import Etudiant
+
 from src.cours import Cours
+from src.etudiant import Etudiant
+from src.personne import Personne
 
 
 def test_student_creation_and_inheritance():
@@ -11,13 +12,14 @@ def test_student_creation_and_inheritance():
     assert student.numero_etudiant == "E12345"
     assert student.moyenne == 15.0
     assert student.liste_cours == ()
+    assert student.notes == ()
 
     assert isinstance(student, Personne) is True
 
 
 def test_student_can_add_course():
     student = Etudiant("Bob", 22, "E12345")
-    course = Cours("UML", "Teacher X")
+    course = Cours("UML", "M. Bernard")
     student.ajouter_cours(course)
 
     assert len(student.liste_cours) == 1
@@ -34,6 +36,12 @@ def test_negative_average_raises_error():
     student = Etudiant("Alice", 20, "E99999", 10.0)
     with pytest.raises(ValueError):
         student.moyenne = -1
+
+
+def test_invalid_average_type_raises_error():
+    student = Etudiant("Alice", 20, "E99999", 10.0)
+    with pytest.raises(TypeError):
+        student.moyenne = "18"
 
 
 def test_valid_average_update():
@@ -74,16 +82,31 @@ def test_course_list_is_not_writable():
 
 def test_course_list_is_not_mutable_from_outside():
     student = Etudiant("Alice", 20, "E99999", 10.0)
-    course = Cours("Python", "Teacher Y")
+    course = Cours("Python", "Mme Lopez")
     student.ajouter_cours(course)
 
     with pytest.raises(AttributeError):
-        student.liste_cours.append(Cours("Java", "Teacher Z"))
+        student.liste_cours.append(Cours("Java", "M. Durand"))
+
+
+def test_adding_note_updates_average():
+    student = Etudiant("Alice", 20, "E99999", 0.0)
+    student.ajouter_note(10)
+    student.ajouter_note(14)
+
+    assert student.notes == (10.0, 14.0)
+    assert student.moyenne == 12.0
+
+
+def test_invalid_note_type_raises_error():
+    student = Etudiant("Alice", 20, "E99999", 0.0)
+    with pytest.raises(TypeError):
+        student.ajouter_note(None)
 
 
 def test_afficher_details_for_student():
     student = Etudiant("Alice", 20, "E99999", 17.5)
-    course = Cours("Python", "Teacher Y")
+    course = Cours("Python", "Mme Lopez")
     student.ajouter_cours(course)
 
     details = student.afficher_details()
@@ -91,3 +114,4 @@ def test_afficher_details_for_student():
     assert "Alice" in details
     assert "17.5" in details
     assert "Python" in details
+    assert "mention" in details

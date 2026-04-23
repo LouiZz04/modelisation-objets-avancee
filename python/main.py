@@ -3,21 +3,20 @@ from src.etudiant import Etudiant
 
 
 def main():
-    print("--- TP1 Demo: Inheritance ---")
+    print("--- TP1: Heritage et composition ---")
 
-    c1 = Cours("Advanced Object Modeling", "Teacher X")
-    c2 = Cours("Software Architecture", "Teacher Y")
+    etudiant = Etudiant("Alice", 21, "ENSTA-2026-001", 15.5)
+    cours_poo = Cours("POO", "M. Dupont")
+    cours_algo = Cours("Algorithmique", "Mme Martin")
 
-    etudiant1 = Etudiant("Alice", 21, "ENSTA-2026-001", 16.5)
+    etudiant.ajouter_cours(cours_poo)
+    etudiant.ajouter_cours(cours_algo)
 
-    etudiant1.ajouter_cours(c1)
-    etudiant1.ajouter_cours(c2)
+    print(etudiant.afficher_details())
+    print("Cours suivis:")
+    for cours in etudiant.liste_cours:
+        print(f"- {cours}")
 
-    print(etudiant1)
-
-    print("\n--- Technical View (repr) ---")
-    print(repr(etudiant1))
-    print(repr(c1))
 
 
 if __name__ == "__main__":

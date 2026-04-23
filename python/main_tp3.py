@@ -5,18 +5,16 @@ from src.personne import Personne
 
 
 def main():
-    print("--- TP3 Demo: Polymorphism ---")
+    print("--- TP3: Polymorphisme ---")
 
-    student = Etudiant("Alice", 21, "ENSTA-2026-001", 16.5)
-    student.ajouter_cours(Cours("Advanced Object Modeling", "Teacher X"))
-    student.ajouter_cours(Cours("Software Architecture", "Teacher Y"))
+    etudiant = Etudiant("Alice", 21, "ENSTA-001", 16.5)
+    etudiant.ajouter_cours(Cours("Python", "Mme Martin"))
+    enseignant = Enseignant("Claire", 40, "Mathematiques", 3200.0)
 
-    teacher = Enseignant("Claire", 40, "Mathematics", 3200.0)
+    personnes: list[Personne] = [etudiant, enseignant]
 
-    people: list[Personne] = [student, teacher]
-
-    for person in people:
-        print(person.afficher_details())
+    for personne in personnes:
+        print(personne.afficher_details())
 
 
 if __name__ == "__main__":
