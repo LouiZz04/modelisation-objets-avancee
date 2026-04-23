@@ -1,0 +1,23 @@
+@startuml
+title SGE - Diagramme de Sequence (Scenario Principal)
+
+actor Main
+participant "Etudiant" as Etudiant
+participant "Cours #1" as Cours1
+participant "Cours #2" as Cours2
+participant "RapportEtudiantService" as Service
+participant "IReportGenerator" as Generator
+
+Main -> Etudiant : new Etudiant("Alice",21,"E2026-001",14.5)
+Main -> Cours1 : new Cours("Algorithmique","Mme Martin")
+Main -> Cours2 : new Cours("POO","M. Dupont")
+
+Main -> Etudiant : ajouterCours(Cours1)
+Main -> Etudiant : ajouterCours(Cours2)
+
+Main -> Service : genererRapport(Etudiant)
+Service -> Generator : generate(Etudiant)
+Generator --> Service : rapport:String
+Service --> Main : rapport:String
+
+@enduml

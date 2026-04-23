@@ -1,0 +1,58 @@
+@startuml
+title SGE - Diagramme de Classe
+
+abstract class Personne {
+  - nom: String
+  - age: int
+  + getNom(): String
+  + setNom(nom: String): void
+  + getAge(): int
+  + setAge(age: int): void
+}
+
+class Etudiant {
+  - numEtudiant: String
+  - moyenne: double
+  - cours: List<Cours>
+  + ajouterCours(c: Cours): void
+  + getCours(): List<Cours>
+}
+
+class Cours {
+  - nomCours: String
+  - professeur: String
+}
+
+interface EtudiantRepository {
+  + save(e: Etudiant): void
+  + findByNumero(numero: String): Optional<Etudiant>
+  + findAll(): List<Etudiant>
+}
+
+class InMemoryEtudiantRepository
+InMemoryEtudiantRepository ..|> EtudiantRepository
+
+interface IReportGenerator {
+  + generate(e: Etudiant): String
+}
+
+class ConsoleReportGenerator
+class JsonReportGenerator
+ConsoleReportGenerator ..|> IReportGenerator
+JsonReportGenerator ..|> IReportGenerator
+
+class RapportEtudiantService {
+  - reportGenerator: IReportGenerator
+  + genererRapport(e: Etudiant): String
+  + setReportGenerator(g: IReportGenerator): void
+}
+
+class Main
+
+Personne <|-- Etudiant
+Etudiant "1" o-- "*" Cours
+Main --> EtudiantRepository
+Main --> RapportEtudiantService
+RapportEtudiantService --> IReportGenerator
+
+@enduml
